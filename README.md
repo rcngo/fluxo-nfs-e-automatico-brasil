@@ -1,5 +1,7 @@
 # NFS-e automática para escritórios contábeis
 
+[![testes](https://github.com/rcngo/fluxo-nfs-e-automatico-brasil/actions/workflows/testes.yml/badge.svg)](https://github.com/rcngo/fluxo-nfs-e-automatico-brasil/actions/workflows/testes.yml) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 Os clientes do escritório pedem a nota fiscal de serviço por **e-mail** ou **WhatsApp**, do jeito que já pedem hoje ("Preciso de uma nota de R$ 3.500 para a empresa X, referente a setembro"). A aplicação lê o pedido e faz uma de três coisas:
 
 | Situação | O que a aplicação faz |
@@ -82,7 +84,7 @@ sudo usermod -aG docker $USER      # depois saia e entre de novo no SSH
 **3. Copie a aplicação e rode o instalador:**
 
 ```bash
-git clone <endereço do repositório> ~/nfs
+git clone https://github.com/rcngo/fluxo-nfs-e-automatico-brasil.git ~/nfs
 cd ~/nfs/infra/producao
 ./instalar.sh
 ```
@@ -132,7 +134,7 @@ docker --version && node --version && git --version
 ### 2. Baixe o código e instale as dependências
 
 ```bash
-git clone <endereço do repositório> nfs-automatica
+git clone https://github.com/rcngo/fluxo-nfs-e-automatico-brasil.git nfs-automatica
 cd nfs-automatica
 npm install
 git config core.hooksPath .githooks     # roda os testes antes de cada commit
