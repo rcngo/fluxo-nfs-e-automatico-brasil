@@ -1,0 +1,20 @@
+nome: NFE.io fora do ar por mais de 4 horas; depois de várias tentativas (um único aviso ao cliente) o pedido vai para o colaborador
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: indisponivel
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - sistema_responde_contendo: "instável"
+  - passa_tempo: 1h
+  - sistema_nao_responde: true
+  - passa_tempo: 2h
+  - sistema_nao_responde: true
+  - estado: AGUARDANDO_EMISSOR
+  - passa_tempo: 1h
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: emissor_indisponivel
+      contendo: ["emissor indisponível", "tentativa", "Valor: R$ 3.500,00"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

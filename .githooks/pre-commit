@@ -1,0 +1,9 @@
+#!/bin/sh
+# Roda testes e cenários antes de cada commit. Precisa do Postgres do compose:
+#   docker compose -f infra/docker-compose.yml up -d postgres
+# Para pular numa emergência: git commit --no-verify (e rodar npm run verificar depois).
+npm run --silent verificar || {
+  echo ""
+  echo "pre-commit: testes ou cenários falharam (o Postgres do compose está rodando?)."
+  exit 1
+}

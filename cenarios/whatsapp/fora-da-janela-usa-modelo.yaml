@@ -1,0 +1,11 @@
+nome: Cliente não responde em 2 dias úteis; o aviso sai fora da janela de 24 h do WhatsApp, então vai pelo modelo aprovado na Meta
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+passos:
+  - cliente: { canal: whatsapp, de: "+5564999990000", texto: "Preciso da nota de programação de setembro da Agro Exemplo, R$ 180,00" }
+  - resposta_whatsapp: { modelo: false }
+  - passa_tempo: 5d
+  - encaminhado_ao_colaborador: { motivo: cliente_nao_respondeu }
+  - sistema_responde_contendo: "encaminhei seu pedido"
+  - resposta_whatsapp: { para: "5564999990000", modelo: nfse_atualizacao }

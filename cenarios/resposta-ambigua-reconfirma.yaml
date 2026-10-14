@@ -1,0 +1,8 @@
+nome: Resposta que não é SIM nem NÃO; o sistema pede de novo
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_CONFIRMACAO
+  - cliente: "Talvez mais tarde"
+  - estado: AGUARDANDO_CONFIRMACAO
+  - sistema_responde_contendo: "Responda SIM para emitir"
+  - notas_emitidas: 0

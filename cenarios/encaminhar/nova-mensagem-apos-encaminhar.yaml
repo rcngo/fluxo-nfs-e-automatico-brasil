@@ -1,0 +1,13 @@
+nome: Cliente manda o dado que faltava depois do encaminhamento; vai para o colaborador e nada é emitido automaticamente
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { texto: "Nota de programação de setembro para a Agro Exemplo.", ia: { falha: true } }
+  - estado: ENCAMINHADO
+  - cliente: "O valor é R$ 3.500,00 e o CNPJ 75.768.426/0001-99"
+  - sistema_nao_responde: true
+  - encaminhado_ao_colaborador:
+      motivo: nova_mensagem
+      contendo: ["[NFS-e] Nova mensagem do cliente", "O valor é R$ 3.500,00"]
+  - estado: ENCAMINHADO
+  - notas_emitidas: 0

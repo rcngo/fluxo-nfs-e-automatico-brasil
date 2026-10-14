@@ -1,0 +1,15 @@
+nome: Depois de 2 perguntas o pedido continua incompleto; na terceira vez vai para o colaborador
+passos:
+  - cliente: "Preciso de uma nota de programação de setembro."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "CNPJ ou CPF do tomador"
+  - cliente: "Não sei o CNPJ agora."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "CNPJ ou CPF do tomador"
+  - cliente: "Depois eu vejo."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: dados_incompletos
+      contendo: ["após 2 pergunta(s)", "O que falta ou está inválido", "o valor da nota"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

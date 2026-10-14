@@ -1,0 +1,25 @@
+{
+  "name": "fluxo-nfs-automatico",
+  "private": true,
+  "scripts": {
+    "test": "node --test n8n/*.test.js motor/*.test.js scripts/*.test.js",
+    "cenarios": "node scripts/cenarios.js",
+    "cenario": "node scripts/cenarios.js --verbose",
+    "teste:painel": "node --test testes/*.test.js",
+    "verificar": "npm test && npm run teste:painel && npm run cenarios",
+    "db:migrar": "node db/migrar.js",
+    "db:seed": "node db/migrar.js --seed",
+    "avaliar": "node avaliacao/rodar.js",
+    "teste:externo": "node scripts/teste-externo.js",
+    "importar": "node scripts/importar.js",
+    "painel:senha": "node scripts/senha-painel.js"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.128.0",
+    "pg": "^8.23.0"
+  },
+  "devDependencies": {
+    "mailparser": "3.9.3",
+    "yaml": "^2.9.1"
+  }
+}

@@ -1,0 +1,32 @@
+Delivered-To: pedidos.exemplo@gmail.com
+Received: by 2002:a05:6a10:1234 with SMTP id abc; Wed, 15 Oct 2026 06:00:00 -0700 (PDT)
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=AbCdEf12;
+       arc=pass (i=1 spf=pass spfdomain=hotmail.com dkim=pass dkdomain=hotmail.com dmarc=pass fromdomain=hotmail.com);
+       spf=pass (google.com: domain of cliente.exemplo@hotmail.com designates 40.92.18.20 as permitted sender) smtp.mailfrom=cliente.exemplo@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+From: Carlos Exemplo <cliente.exemplo@hotmail.com>
+To: "pedidos.exemplo@gmail.com" <pedidos.exemplo@gmail.com>
+Subject: Re: [NFS-e] Não consegui emitir — MODELO E CIA — dados incompletos
+Date: Wed, 15 Oct 2026 13:00:00 +0000
+Message-ID: <resposta-notificacao@hotmail.com>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="b1"
+
+--b1
+Content-Type: text/plain; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+Bom dia!
+
+Preciso da nota de programa=E7=E3o de setembro para a Agro Exemplo, CNPJ 75.768=
+.426/0001-99, no valor de R$ 3.500,00.
+
+Obrigado,
+Carlos
+--b1
+Content-Type: text/html; charset="iso-8859-1"
+Content-Transfer-Encoding: quoted-printable
+
+<html><body><div>Bom dia!</div><div>Preciso da nota de programa=E7=E3o de setembro para a Agro Exemplo, CNPJ 75.768.426/0001-99, no valor de R$ 3.500,00.</div><div>Obrigado,<br>Carlos</div></body></html>
+--b1--

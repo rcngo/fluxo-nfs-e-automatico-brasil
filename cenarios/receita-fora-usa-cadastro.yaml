@@ -1,0 +1,14 @@
+nome: Receita fora do ar e o tomador já tinha sido consultado antes (com endereço, sem natureza jurídica); o cadastro é usado e, sem saber se é órgão público, o pedido vai ao colaborador em vez de perguntar o endereço ao cliente
+dado:
+  empresa: { exige_confirmacao: false }
+  receita: fora
+  tomadores:
+    - { documento: "75768426000199", nome: "AGRO EXEMPLO COMERCIO LTDA", consultado_antes_da_e3: true }
+passos:
+  - cliente: "Nota de R$ 150,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo: ["não foi possível confirmar na Receita se o tomador é órgão público", "Tomador: AGRO EXEMPLO COMERCIO LTDA"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

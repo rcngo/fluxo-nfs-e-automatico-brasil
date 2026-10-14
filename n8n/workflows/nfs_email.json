@@ -1,0 +1,577 @@
+{
+  "id": "NfsEmailPoc00001",
+  "name": "NFS - E-mail",
+  "nodes": [
+    {
+      "id": "node-0",
+      "name": "Gmail: novo e-mail",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {
+          "q": "in:inbox -from:me -subject:\"[NFS-e]\""
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-1",
+      "name": "Gmail: autenticação",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        240,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "method": "GET",
+        "url": "=https://gmail.googleapis.com/gmail/v1/users/me/messages/{{ $json.id }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "gmailOAuth2",
+        "sendQuery": true,
+        "queryParameters": {
+          "parameters": [
+            {
+              "name": "format",
+              "value": "metadata"
+            },
+            {
+              "name": "metadataHeaders",
+              "value": "Authentication-Results"
+            }
+          ]
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-2",
+      "name": "Montar e-mail",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const email = $('Gmail: novo e-mail').item.json;\nconst cabecalhos = ($json.payload && $json.payload.headers) || [];\nreturn {\n  json: {\n    ...email,\n    autenticacao: cabecalhos.filter((h) => h.name.toLowerCase() === 'authentication-results').map((h) => h.value),\n  },\n};"
+      }
+    },
+    {
+      "id": "node-3",
+      "name": "Motor: e-mail",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://motor:3000/email",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 180000
+        }
+      }
+    },
+    {
+      "id": "node-4",
+      "name": "A cada 2 minutos",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        300
+      ],
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 2
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "node-5",
+      "name": "Motor: retomar pendentes",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        720,
+        300
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://motor:3000/retomar",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\"canal\":\"email\"}",
+        "options": {
+          "timeout": 180000
+        }
+      }
+    },
+    {
+      "id": "node-6",
+      "name": "Encaminhar?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        960,
+        150
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Encaminhar?",
+              "leftValue": "={{ !!($json.encaminhar && $json.encaminhar.para_email) }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-7",
+      "name": "Gmail: enviar ao colaborador",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1200,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json.encaminhar.para_email }}",
+        "subject": "={{ $json.encaminhar.assunto }}",
+        "emailType": "text",
+        "message": "={{ $json.encaminhar.texto }}",
+        "options": {
+          "appendAttribution": false
+        }
+      }
+    },
+    {
+      "id": "node-8",
+      "name": "Motor: encaminhamento enviado",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1440,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://motor:3000/encaminhado",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ encaminhamento_id: $('Encaminhar?').item.json.encaminhar.encaminhamento_id }) }}",
+        "options": {
+          "timeout": 180000
+        }
+      }
+    },
+    {
+      "id": "node-9",
+      "name": "Seguir com a resposta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1680,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "return { json: $('Encaminhar?').item.json };"
+      }
+    },
+    {
+      "id": "node-10",
+      "name": "Responder?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        150
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Responder?",
+              "leftValue": "={{ $json.responder }}",
+              "rightValue": "",
+              "operator": {
+                "type": "boolean",
+                "operation": "true",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-11",
+      "name": "Tem anexos?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2160,
+        150
+      ],
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "loose",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "Tem anexos?",
+              "leftValue": "={{ ($json.anexos || []).length }}",
+              "rightValue": 0,
+              "operator": {
+                "type": "number",
+                "operation": "gt"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      }
+    },
+    {
+      "id": "node-12",
+      "name": "Preparar anexos",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        2400,
+        0
+      ],
+      "parameters": {
+        "jsCode": "const saida = [];\nfor (const i of $input.all()) {\n  const binary = {};\n  for (const a of i.json.anexos) {\n    binary[a.campo] = { data: a.base64, mimeType: a.mime, fileName: a.nome };\n  }\n  const { anexos, ...json } = i.json;\n  saida.push({ json, binary });\n}\nreturn saida;"
+      }
+    },
+    {
+      "id": "node-13",
+      "name": "Gmail: responder com a nota",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2640,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "resource": "message",
+        "operation": "reply",
+        "messageId": "={{ $json.responder_para }}",
+        "emailType": "text",
+        "message": "={{ $json.texto }}",
+        "options": {
+          "appendAttribution": false,
+          "replyToSenderOnly": true,
+          "attachmentsUi": {
+            "attachmentsBinary": [
+              {
+                "property": "nota_pdf,nota_xml"
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "id": "node-14",
+      "name": "Motor: marcar entregue",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2880,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://motor:3000/entregue",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify({ pedido_id: $('Preparar anexos').item.json.pedido_id }) }}",
+        "options": {
+          "timeout": 180000
+        }
+      }
+    },
+    {
+      "id": "node-15",
+      "name": "Gmail: responder",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        2400,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "resource": "message",
+        "operation": "reply",
+        "messageId": "={{ $json.responder_para }}",
+        "emailType": "text",
+        "message": "={{ $json.texto }}",
+        "options": {
+          "appendAttribution": false,
+          "replyToSenderOnly": true
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Gmail: novo e-mail": {
+      "main": [
+        [
+          {
+            "node": "Gmail: autenticação",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail: autenticação": {
+      "main": [
+        [
+          {
+            "node": "Montar e-mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar e-mail": {
+      "main": [
+        [
+          {
+            "node": "Motor: e-mail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor: e-mail": {
+      "main": [
+        [
+          {
+            "node": "Encaminhar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "A cada 2 minutos": {
+      "main": [
+        [
+          {
+            "node": "Motor: retomar pendentes",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor: retomar pendentes": {
+      "main": [
+        [
+          {
+            "node": "Encaminhar?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Encaminhar?": {
+      "main": [
+        [
+          {
+            "node": "Gmail: enviar ao colaborador",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Responder?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail: enviar ao colaborador": {
+      "main": [
+        [
+          {
+            "node": "Motor: encaminhamento enviado",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor: encaminhamento enviado": {
+      "main": [
+        [
+          {
+            "node": "Seguir com a resposta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Seguir com a resposta": {
+      "main": [
+        [
+          {
+            "node": "Responder?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Responder?": {
+      "main": [
+        [
+          {
+            "node": "Tem anexos?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Tem anexos?": {
+      "main": [
+        [
+          {
+            "node": "Preparar anexos",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Gmail: responder",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Preparar anexos": {
+      "main": [
+        [
+          {
+            "node": "Gmail: responder com a nota",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Gmail: responder com a nota": {
+      "main": [
+        [
+          {
+            "node": "Motor: marcar entregue",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1",
+    "errorWorkflow": "NfsErrosPoc00001"
+  },
+  "active": false
+}

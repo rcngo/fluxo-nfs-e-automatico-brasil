@@ -1,0 +1,8 @@
+nome: Reação (emoji) a uma mensagem não é pedido; nada acontece
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+passos:
+  - cliente: { whatsapp: reacao.json }
+  - sistema_nao_responde: true
+  - nenhum_pedido: true

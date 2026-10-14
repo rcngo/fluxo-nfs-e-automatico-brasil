@@ -1,0 +1,11 @@
+nome: A Meta entrega a mesma mensagem duas vezes (mesmo wamid); a segunda é ignorada e só sai uma nota
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { whatsapp: texto.json }
+  - notas_emitidas: 1
+  - cliente: { whatsapp: texto.json }
+  - sistema_nao_responde: true
+  - notas_emitidas: 1

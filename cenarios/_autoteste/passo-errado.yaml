@@ -1,0 +1,5 @@
+nome: Autoteste do executor — este cenário tem um passo errado de propósito e precisa falhar
+deve_falhar: true
+passos:
+  - cliente: "Preciso de uma nota de programação para a Agro Exemplo."
+  - estado: EMITIDA

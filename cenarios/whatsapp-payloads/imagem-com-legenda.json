@@ -1,0 +1,42 @@
+{
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "102290129340398",
+      "changes": [
+        {
+          "field": "messages",
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+              "display_phone_number": "15550783881",
+              "phone_number_id": "106540352242922"
+            },
+            "contacts": [
+              {
+                "profile": {
+                  "name": "Carlos Exemplo"
+                },
+                "wa_id": "556499990000"
+              }
+            ],
+            "messages": [
+              {
+                "from": "556499990000",
+                "id": "wamid.HBgMNTU2NDk5OTkwMDAwFQIAEhggIMAGEM01",
+                "timestamp": "1792058400",
+                "type": "image",
+                "image": {
+                  "caption": "segue o pedido da Agro Exemplo",
+                  "mime_type": "image/jpeg",
+                  "sha256": "y",
+                  "id": "2234567890123456"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

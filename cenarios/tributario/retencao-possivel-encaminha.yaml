@@ -1,0 +1,17 @@
+nome: Serviço marcado com possível retenção para tomador PJ; pedido para PJ vai para o colaborador com o porquê
+dado:
+  empresa: { exige_confirmacao: false }
+  servico: { pode_ter_retencao: [pj] }
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo:
+        - "[NFS-e] Não consegui emitir — MODELO E CIA DESENVOLVIMENTO DE SISTEMAS LTDA — caso tributário especial"
+        - "Por que é especial:"
+        - "tomador pessoa jurídica e o serviço \"programação\" está marcado como sujeito a retenção para esse tipo de tomador"
+        - "Tomador: AGRO EXEMPLO COMERCIO LTDA (75768426000199)"
+        - "Valor: R$ 3.500,00"
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

@@ -1,0 +1,11 @@
+nome: Falta o CNPJ; o sistema pergunta, o cliente responde e a nota sai
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Preciso de uma nota de R$ 3.500,00 de programação referente a setembro para a Agro Exemplo."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "CNPJ ou CPF do tomador"
+  - notas_emitidas: 0
+  - cliente: "É 75.768.426/0001-99"
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }
+  - estado: EMITIDA

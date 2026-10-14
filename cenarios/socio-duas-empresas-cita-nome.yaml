@@ -1,0 +1,8 @@
+nome: Remetente com duas empresas cita o nome da empresa no pedido; o sistema não precisa perguntar
+dado:
+  empresa: { exige_confirmacao: false }
+  outras_empresas:
+    - { cnpj: "81452590000195", razao_social: "AURORA SERVICOS DIGITAIS LTDA", exige_confirmacao: false }
+passos:
+  - cliente: "Emitir pela Modelo e Cia uma nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - nota_emitida: { valor: 350000, empresa: "82571297000100" }

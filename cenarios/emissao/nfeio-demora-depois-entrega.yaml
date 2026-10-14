@@ -1,0 +1,14 @@
+nome: A NFE.io aceita a nota mas demora para concluir; a tarefa periódica entrega quando ela termina
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: demora
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: EMITINDO
+  - sistema_nao_responde: true
+  - passa_tempo: 2m
+  - estado: EMITINDO
+  - nfeio_conclui: true
+  - passa_tempo: 2m
+  - sistema_entrega: [pdf, xml]
+  - notas_emitidas: 1

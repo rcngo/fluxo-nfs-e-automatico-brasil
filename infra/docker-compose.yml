@@ -1,0 +1,77 @@
+# n8n + Postgres para a PoC (self-hosted).
+# Uso: cp .env.example .env && preencher && docker compose up -d
+# Postgres guarda dois bancos: "n8n" (interno do n8n) e "nfs" (dados da aplicação).
+# Nome de projeto fixo: sem ele o Compose usa o nome da pasta ("infra") e colide com
+# outros projetos da máquina que também ficam numa pasta "infra".
+
+name: nfs-poc
+
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: n8n
+      APP_DB: nfs
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./postgres-init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "127.0.0.1:5433:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d n8n"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  n8n:
+    # Versão fixa (a "stable" de 21/09/2026). Atualizar de propósito, testando os workflows.
+    image: docker.n8n.io/n8nio/n8n:2.40.5
+    restart: unless-stopped
+    ports:
+      - "5678:5678"
+    environment:
+      DB_TYPE: postgresdb
+      DB_POSTGRESDB_HOST: postgres
+      DB_POSTGRESDB_PORT: "5432"
+      DB_POSTGRESDB_DATABASE: n8n
+      DB_POSTGRESDB_USER: ${POSTGRES_USER}
+      DB_POSTGRESDB_PASSWORD: ${POSTGRES_PASSWORD}
+      N8N_ENCRYPTION_KEY: ${N8N_ENCRYPTION_KEY}
+      # URL pública (túnel/reverse proxy) — necessária para os webhooks da NFE.io e do WhatsApp.
+      N8N_WEBHOOK_URL: ${N8N_WEBHOOK_URL}
+      GENERIC_TIMEZONE: America/Sao_Paulo
+      TZ: America/Sao_Paulo
+    volumes:
+      - n8n_data:/home/node/.n8n
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  # Regras do fluxo (extração, decisão, emissão). O n8n chama em http://motor:3000.
+  motor:
+    image: node:24-alpine
+    restart: unless-stopped
+    working_dir: /app
+    # Aplica as migrações pendentes (e os dados de teste da PoC) antes de subir.
+    command: ["sh", "-c", "node db/migrar.js --seed && node motor/server.js"]
+    env_file: ./secrets.env          # NFEIO_API_KEY, ANTHROPIC_API_KEY
+    # Só nesta máquina: link "Resolvido" dos e-mails de encaminhamento (em produção, domínio público).
+    ports:
+      - "127.0.0.1:3010:3000"
+    environment:
+      DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/nfs
+      URL_PUBLICA: ${URL_PUBLICA_MOTOR:-http://localhost:3010}
+      PASTA_DOMINIO: /app/saida/dominio
+      TZ: America/Sao_Paulo
+    volumes:
+      - ..:/app
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+volumes:
+  pgdata:
+  n8n_data:

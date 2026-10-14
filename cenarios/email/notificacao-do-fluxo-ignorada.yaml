@@ -1,0 +1,6 @@
+nome: Resposta a uma notificação do próprio fluxo ("[NFS-e] ..."); não é pedido de nota e é ignorada
+passos:
+  - cliente: { eml: resposta-a-notificacao-do-fluxo.eml }
+  - sistema_nao_responde: true
+  - nada_encaminhado: true
+  - nenhum_pedido: true

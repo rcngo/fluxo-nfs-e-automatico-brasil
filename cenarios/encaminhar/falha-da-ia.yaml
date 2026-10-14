@@ -1,0 +1,8 @@
+nome: A IA falha ao ler o pedido; vai para o colaborador
+passos:
+  - cliente: { texto: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro.", ia: { falha: true } }
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: falha_leitura
+      contendo: ["A IA não conseguiu ler o pedido", "Cliente: Nota de R$ 3.500,00"]
+  - sistema_responde_contendo: "encaminhei ao escritório"

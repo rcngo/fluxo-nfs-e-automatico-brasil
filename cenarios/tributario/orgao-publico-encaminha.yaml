@@ -1,0 +1,13 @@
+nome: Tomador é órgão público (natureza jurídica da Receita); vai para o colaborador mesmo sem retenção marcada no serviço
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 12.000,00 para a Prefeitura, CNPJ 73.479.394/0001-86, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo:
+        - "o tomador é órgão público (Município, natureza jurídica 1244 na Receita)"
+        - "Tomador: MUNICIPIO DE EXEMPLO (73479394000186)"
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

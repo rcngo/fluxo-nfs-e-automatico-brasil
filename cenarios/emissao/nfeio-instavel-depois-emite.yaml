@@ -1,0 +1,17 @@
+nome: NFE.io fora do ar por alguns minutos; o cliente recebe um único aviso e a nota sai quando o emissor volta
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [indisponivel, indisponivel, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - sistema_responde_contendo: ["instável", "sua nota será emitida assim que normalizar"]
+  - nada_encaminhado: true
+  - passa_tempo: 5m
+  - sistema_nao_responde: true
+  - estado: AGUARDANDO_EMISSOR
+  - passa_tempo: 10m
+  - nota_emitida: { valor: 350000, tomador: "75768426000199", competencia: "2026-09" }
+  - sistema_entrega: [pdf, xml]
+  - notas_emitidas: 1
+  - estado: EMITIDA

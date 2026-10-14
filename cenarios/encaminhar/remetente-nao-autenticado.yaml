@@ -1,0 +1,9 @@
+nome: E-mail de remetente cadastrado mas sem autenticação SPF/DKIM (possível falsificação); vai para o colaborador sem resposta ao remetente
+passos:
+  - cliente: { texto: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro.", autenticado: false }
+  - sistema_nao_responde: true
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: remetente_nao_autorizado
+      contendo: ["MODELO E CIA", "sem autenticação SPF/DKIM", "pode ser falsificação"]
+  - notas_emitidas: 0

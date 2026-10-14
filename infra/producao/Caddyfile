@@ -1,0 +1,38 @@
+# Único ponto aberto para a internet. HTTPS automático (Let's Encrypt) no domínio do escritório.
+# Exposto só o que precisa ser público:
+#   /painel, /resolvido   motor (painel com login; link "Resolvido" dos e-mails ao colaborador)
+#   /webhook/whatsapp     n8n (mensagens da Meta; a assinatura é conferida pelo motor)
+# O resto (rotas internas do motor, editor do n8n) responde 404. O editor do n8n é acessado
+# só pelo próprio servidor (túnel SSH, ver docs/INSTALACAO.md).
+{
+	email {$EMAIL_ACME}
+}
+
+{$DOMINIO} {
+	encode gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		-Server
+	}
+
+	@motor path /painel /painel/* /resolvido
+	handle @motor {
+		reverse_proxy motor:3000
+	}
+
+	@whatsapp path /webhook/whatsapp
+	handle @whatsapp {
+		reverse_proxy n8n:5678
+	}
+
+	handle / {
+		redir * /painel 302
+	}
+
+	handle {
+		respond "Não encontrado" 404
+	}
+}

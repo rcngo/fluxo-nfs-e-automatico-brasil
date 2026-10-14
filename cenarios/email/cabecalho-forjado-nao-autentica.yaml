@@ -1,0 +1,6 @@
+nome: E-mail falsificado com um "Authentication-Results ... dmarc=pass" escrito pelo próprio remetente; vale o resultado do Gmail (topo), que reprova
+passos:
+  - cliente: { eml: cabecalho-forjado.eml }
+  - sistema_nao_responde: true
+  - encaminhado_ao_colaborador: { motivo: remetente_nao_autorizado }
+  - notas_emitidas: 0

@@ -1,0 +1,9 @@
+nome: Cliente corrige o valor durante a confirmação; novo resumo e nota com o valor corrigido
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - sistema_responde_contendo: "R$ 3.500,00"
+  - cliente: "Na verdade o valor é R$ 4.000,00"
+  - estado: AGUARDANDO_CONFIRMACAO
+  - sistema_responde_contendo: ["R$ 4.000,00", "Responda SIM"]
+  - cliente: "SIM"
+  - nota_emitida: { valor: 400000 }

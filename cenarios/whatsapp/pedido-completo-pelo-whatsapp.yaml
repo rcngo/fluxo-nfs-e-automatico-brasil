@@ -1,0 +1,12 @@
+nome: Pedido completo pelo WhatsApp (o WhatsApp manda o número sem o 9; o cadastro tem com o 9); resumo, SIM e a nota chega com PDF e XML
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+passos:
+  - cliente: { whatsapp: texto.json }
+  - sistema_responde_contendo: ["Responda SIM", "R$ 3.500,00"]
+  - resposta_whatsapp: { para: "556499990000", modelo: false }
+  - cliente: { canal: whatsapp, de: "556499990000", texto: "sim" }
+  - nota_emitida: { valor: 350000, tomador: "75768426000199", competencia: "2026-09" }
+  - sistema_entrega: [pdf, xml]
+  - resposta_whatsapp: { para: "556499990000", modelo: false }

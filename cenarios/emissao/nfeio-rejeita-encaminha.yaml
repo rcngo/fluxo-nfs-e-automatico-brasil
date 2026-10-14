@@ -1,0 +1,11 @@
+nome: A NFE.io rejeita a nota; o colaborador recebe o erro da NFE.io e o cliente é avisado
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: rejeita
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: erro_emissao
+      contendo: ["Confira no painel da NFE.io", "IssueFailed", "Código de serviço inválido"]
+  - sistema_responde_contendo: "encaminhei ao escritório"

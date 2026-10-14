@@ -1,0 +1,8 @@
+nome: Pedido completo; empresa não exige confirmação; a nota sai direto
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Emitir nota de R$ 3.500,00 para 75.768.426/0001-99, serviço de programação de setembro."
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }
+  - sistema_entrega: [pdf, xml]
+  - estado: EMITIDA

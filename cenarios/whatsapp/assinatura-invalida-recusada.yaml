@@ -1,0 +1,8 @@
+nome: Webhook com assinatura inválida (não veio da Meta) é recusado e nada é gravado
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+passos:
+  - cliente: { whatsapp: texto.json, assinatura: invalida }
+  - webhook_recusado: true
+  - nenhum_pedido: true

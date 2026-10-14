@@ -1,0 +1,9 @@
+nome: Falta o CNPJ; o cliente responde pelo Outlook com o histórico citado embaixo, e só o texto novo vale
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { eml: pedido-sem-cnpj.eml }
+  - sistema_responde_contendo: "CNPJ ou CPF do tomador"
+  - cliente: { eml: resposta-outlook-com-citacao.eml }
+  - mensagem_do_cliente_registrada: "Segue o CNPJ: 75.768.426/0001-99\n\nAtt,\nCarlos"
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }

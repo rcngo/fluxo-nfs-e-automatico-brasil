@@ -1,0 +1,13 @@
+nome: Pedido completo; empresa exige confirmação; cliente responde SIM e recebe a nota
+passos:
+  - cliente: "Bom dia! Preciso de uma nota de R$ 3.500,00 para o CNPJ 75.768.426/0001-99, serviço de programação referente a setembro."
+  - estado: AGUARDANDO_CONFIRMACAO
+  - sistema_responde_contendo: ["AGRO EXEMPLO COMERCIO LTDA", "R$ 3.500,00", "2026-09", "Responda SIM"]
+  - notas_emitidas: 0
+  - cliente: "SIM"
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }
+  - sistema_responde_contendo: "Nota emitida"
+  - sistema_entrega: [pdf, xml]
+  - estado: EMITIDA
+  - canal_confirma_entrega: true
+  - estado: ENTREGUE

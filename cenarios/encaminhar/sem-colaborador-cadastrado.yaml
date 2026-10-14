@@ -1,0 +1,9 @@
+nome: Nenhum colaborador cadastrado; o pedido fica encaminhado e registrado, sem destinatário (o painel mostra)
+dado:
+  sem_colaboradores: true
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 60.000,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador: { motivo: valor_fora_da_faixa, para: null }
+  - notas_emitidas: 0

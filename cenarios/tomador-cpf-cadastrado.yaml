@@ -1,0 +1,9 @@
+nome: Tomador pessoa física cadastrado pela planilha; o nome vem do cadastro e a nota sai
+dado:
+  empresa: { exige_confirmacao: false }
+  tomadores:
+    - { documento: "52998224725", nome: "FULANO DE TAL" }
+passos:
+  - cliente: "Nota de R$ 800,00 para o CPF 529.982.247-25, programação de setembro."
+  - nota_emitida: { valor: 80000, tomador: "52998224725" }
+  - sistema_responde_contendo: "FULANO DE TAL"

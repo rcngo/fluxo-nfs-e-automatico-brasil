@@ -1,0 +1,2 @@
+cnpj;razao_social;nfeio_company_id;municipio_ibge;valor_minimo;valor_maximo;exige_confirmacao;colaborador_email
+98.765.432/0001-98;EXEMPLO CONSULTORIA LTDA;cole-aqui-o-id-da-empresa-na-nfeio;5205109;100,00;20.000,00;sim;joao@escritorio-exemplo.com.br

@@ -1,0 +1,14 @@
+nome: Colaborador resolve pelo link; o link só funciona uma vez, link adulterado é recusado, e depois disso a conversa volta ao automático
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 60.000,00 para 75.768.426/0001-99, programação de setembro."
+  - encaminhado_ao_colaborador: { motivo: valor_fora_da_faixa }
+  - colaborador_resolve: { link: adulterado }
+  - estado: ENCAMINHADO
+  - colaborador_resolve: { numero_nota: "1234" }
+  - estado: RESOLVIDO_MANUAL
+  - motivo_contendo: "nota 1234"
+  - colaborador_resolve: { esperado: ja_resolvido }
+  - cliente: "Agora sim: nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - nota_emitida: { valor: 350000 }

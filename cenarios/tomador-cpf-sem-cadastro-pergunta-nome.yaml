@@ -1,0 +1,8 @@
+nome: Tomador pessoa física sem cadastro e sem nome na mensagem; o sistema pergunta o nome
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 800,00 para o CPF 529.982.247-25, programação de setembro."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "nome ou razão social do tomador"
+  - notas_emitidas: 0

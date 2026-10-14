@@ -1,0 +1,6 @@
+nome: E-mail com o remetente cadastrado mas reprovado na autenticação (DKIM/SPF/DMARC falham); nada é emitido, sem resposta, e o colaborador é avisado
+passos:
+  - cliente: { eml: dkim-falha.eml }
+  - sistema_nao_responde: true
+  - encaminhado_ao_colaborador: { motivo: remetente_nao_autorizado, contendo: ["sem autenticação"] }
+  - notas_emitidas: 0

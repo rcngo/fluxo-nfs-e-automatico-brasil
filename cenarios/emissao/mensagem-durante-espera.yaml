@@ -1,0 +1,13 @@
+nome: Cliente escreve enquanto a nota espera a NFE.io voltar; nada é feito em paralelo e a nota sai uma vez só
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [indisponivel, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - cliente: "E aí, saiu a nota?"
+  - sistema_nao_responde: true
+  - estado: AGUARDANDO_EMISSOR
+  - passa_tempo: 5m
+  - sistema_entrega: [pdf, xml]
+  - notas_emitidas: 1

@@ -1,0 +1,6 @@
+nome: E-mail só em HTML (sem parte de texto); o pedido é lido e a citação antiga é descartada
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { eml: so-html.eml }
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }

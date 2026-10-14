@@ -1,0 +1,6 @@
+nome: E-mail com From do cliente mas assinado (DKIM/SPF) por outro domínio; não conta como autenticado
+passos:
+  - cliente: { eml: assinado-por-outro-dominio.eml }
+  - sistema_nao_responde: true
+  - encaminhado_ao_colaborador: { motivo: remetente_nao_autorizado }
+  - notas_emitidas: 0

@@ -1,0 +1,14 @@
+nome: Enquanto a nota espera a NFE.io voltar, o cliente manda o mesmo pedido num e-mail novo; o sistema avisa que já há uma nota igual em emissão e pede SIM
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [indisponivel, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - cliente: { texto: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro.", conversa: conversa-2 }
+  - sistema_responde_contendo: ["nota igual", "Responda SIM"]
+  - estado: AGUARDANDO_CONFIRMACAO
+    conversa: conversa-2
+  - passa_tempo: 5m
+  - sistema_entrega: [pdf, xml]
+  - notas_emitidas: 1

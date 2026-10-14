@@ -1,0 +1,9 @@
+nome: Tomador CNPJ cadastrado pela planilha (sem endereço); o endereço vem da Receita e a nota sai
+dado:
+  empresa: { exige_confirmacao: false }
+  tomadores:
+    - { documento: "74865958000181", nome: "Empresa Teste (apelido da planilha)" }
+passos:
+  - cliente: "Nota de R$ 1.200,00 para 74.865.958/0001-81, programação de setembro."
+  - nota_emitida: { valor: 120000, tomador: "74865958000181" }
+  - sistema_responde_contendo: "EMPRESA TESTE LTDA"

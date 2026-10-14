@@ -1,0 +1,6 @@
+nome: Número de WhatsApp não cadastrado pede nota; nada é emitido, sem resposta, e o colaborador é avisado
+passos:
+  - cliente: { canal: whatsapp, de: "+5511987654321", texto: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro." }
+  - sistema_nao_responde: true
+  - encaminhado_ao_colaborador: { motivo: remetente_nao_autorizado, contendo: ["+5511987654321", "WhatsApp"] }
+  - notas_emitidas: 0

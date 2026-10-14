@@ -1,0 +1,11 @@
+nome: Valor acima do máximo cadastrado para a empresa; vai para o colaborador com os dados já coletados
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 60.000,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: valor_fora_da_faixa
+      contendo: ["valor fora da faixa", "R$ 60.000,00 fora da faixa cadastrada (R$ 100,00 a R$ 50.000,00)", "Tomador: AGRO EXEMPLO"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

@@ -1,0 +1,10 @@
+nome: A caixa é lida de novo e o mesmo e-mail chega outra vez; nada é processado em dobro
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { eml: pedido-completo.eml }
+  - notas_emitidas: 1
+  - cliente: { eml: pedido-completo.eml }
+  - sistema_nao_responde: true
+  - nada_encaminhado: true
+  - notas_emitidas: 1

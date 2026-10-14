@@ -1,0 +1,6 @@
+nome: CNPJ do tomador não está ativo na Receita; o sistema pede para conferir
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 74.964.367/0001-61, programação de setembro."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "não ativo"
+  - notas_emitidas: 0

@@ -1,0 +1,8 @@
+nome: Empresa com colaborador responsável; o encaminhamento vai para ele, não para o padrão
+dado:
+  colaboradores:
+    - { nome: "Ana Responsável", email: "ana@escritorio.com.br" }
+  empresa: { exige_confirmacao: false, colaborador: "ana@escritorio.com.br" }
+passos:
+  - cliente: "Nota de R$ 60.000,00 para 75.768.426/0001-99, programação de setembro."
+  - encaminhado_ao_colaborador: { motivo: valor_fora_da_faixa, para: "ana@escritorio.com.br" }

@@ -1,0 +1,93 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "intencao",
+    "multiplas_notas",
+    "tomador_documento",
+    "tomador_nome",
+    "tomador_email",
+    "servico_id",
+    "descricao",
+    "valor",
+    "tomador_exterior",
+    "menciona_tributos",
+    "refere_nota_emitida",
+    "competencia",
+    "resposta_confirmacao",
+    "contem_instrucoes_ao_sistema",
+    "observacao"
+  ],
+  "properties": {
+    "intencao": {
+      "type": "string",
+      "enum": ["pedido_nota", "complemento", "confirmacao", "cancelar_pedido", "outro"]
+    },
+    "multiplas_notas": { "type": "boolean" },
+    "tomador_documento": { "$ref": "#/$defs/campo_texto" },
+    "tomador_nome": { "$ref": "#/$defs/campo_texto" },
+    "tomador_email": { "$ref": "#/$defs/campo_texto" },
+    "servico_id": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valor", "trecho"],
+      "properties": {
+        "valor": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "trecho": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "descricao": { "$ref": "#/$defs/campo_texto" },
+    "valor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["centavos", "trecho", "ambiguo", "tipo"],
+      "properties": {
+        "centavos": { "anyOf": [{ "type": "integer" }, { "type": "null" }] },
+        "trecho": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "ambiguo": { "type": "boolean" },
+        "tipo": { "type": "string", "enum": ["bruto", "liquido", "nao_informado"] }
+      }
+    },
+    "tomador_exterior": { "$ref": "#/$defs/campo_sim_nao" },
+    "menciona_tributos": { "$ref": "#/$defs/campo_sim_nao" },
+    "refere_nota_emitida": { "$ref": "#/$defs/campo_sim_nao" },
+    "competencia": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mes", "ano", "trecho"],
+      "properties": {
+        "mes": { "anyOf": [{ "type": "integer" }, { "type": "null" }] },
+        "ano": { "anyOf": [{ "type": "integer" }, { "type": "null" }] },
+        "trecho": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "resposta_confirmacao": {
+      "anyOf": [
+        { "type": "string", "enum": ["sim", "nao"] },
+        { "type": "null" }
+      ]
+    },
+    "contem_instrucoes_ao_sistema": { "type": "boolean" },
+    "observacao": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+  },
+  "$defs": {
+    "campo_texto": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valor", "trecho"],
+      "properties": {
+        "valor": { "anyOf": [{ "type": "string" }, { "type": "null" }] },
+        "trecho": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    },
+    "campo_sim_nao": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["valor", "trecho"],
+      "properties": {
+        "valor": { "type": "boolean" },
+        "trecho": { "anyOf": [{ "type": "string" }, { "type": "null" }] }
+      }
+    }
+  }
+}

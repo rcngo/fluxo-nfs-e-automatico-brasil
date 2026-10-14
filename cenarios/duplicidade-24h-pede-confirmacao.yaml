@@ -1,0 +1,10 @@
+nome: Nota igual emitida nas últimas 24h; mesmo sem exigir confirmação, o sistema pede SIM
+dado:
+  empresa: { exige_confirmacao: false }
+  historico:
+    - { tomador: "75768426000199", valor: 350000, estado: ENTREGUE, ha: 2h }
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_CONFIRMACAO
+  - sistema_responde_contendo: "últimas 24h"
+  - notas_emitidas: 0

@@ -1,0 +1,11 @@
+nome: Falta o CNPJ; a pergunta e a resposta acontecem na mesma conversa do WhatsApp e a nota sai
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: { canal: whatsapp, de: "+5564999990000", texto: "Preciso da nota de programação de setembro da Agro Exemplo, R$ 180,00" }
+  - sistema_responde_contendo: "CNPJ ou CPF do tomador"
+  - cliente: { canal: whatsapp, de: "+5564999990000", texto: "75.768.426/0001-99" }
+  - nota_emitida: { valor: 18000, tomador: "75768426000199" }
+  - resposta_whatsapp: { para: "5564999990000" }

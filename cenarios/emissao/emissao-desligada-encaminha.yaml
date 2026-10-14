@@ -1,0 +1,11 @@
+nome: Botão de desligar a emissão ativo; pedido válido vai para o colaborador em vez de ficar parado
+dado:
+  empresa: { exige_confirmacao: false }
+  emissao_habilitada: false
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: emissao_desligada
+      contendo: ["emissão automática está desligada", "Valor: R$ 3.500,00", "Competência: 2026-09"]
+  - notas_emitidas: 0

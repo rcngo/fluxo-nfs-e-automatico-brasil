@@ -1,0 +1,13 @@
+nome: A conexão cai no envio e a nota não chegou a ser criada; a consulta pela referência confirma, e só então o sistema envia de novo
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [falha_envio, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - sistema_responde_contendo: "instável"
+  - notas_emitidas: 0
+  - passa_tempo: 5m
+  - nota_emitida: { valor: 350000, tomador: "75768426000199", competencia: "2026-09" }
+  - sistema_entrega: [pdf, xml]
+  - notas_emitidas: 1

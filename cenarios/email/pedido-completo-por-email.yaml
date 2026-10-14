@@ -1,0 +1,8 @@
+nome: Pedido completo por e-mail (Hotmail, texto + HTML); resumo, resposta "sim" pelo Gmail com histórico citado e nota na mesma conversa
+passos:
+  - cliente: { eml: pedido-completo.eml }
+  - sistema_responde_contendo: ["Responda SIM", "R$ 3.500,00"]
+  - cliente: { eml: resposta-gmail-com-citacao.eml }
+  - mensagem_do_cliente_registrada: "Sim, pode emitir."
+  - nota_emitida: { valor: 350000, tomador: "75768426000199", competencia: "2026-09" }
+  - sistema_entrega: [pdf, xml]

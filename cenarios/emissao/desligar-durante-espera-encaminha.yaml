@@ -1,0 +1,12 @@
+nome: O escritório desliga a emissão enquanto o pedido espera a NFE.io voltar; a nova tentativa não acontece e o pedido vai para o colaborador
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [indisponivel, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - escritorio_configura: { emissao_habilitada: false }
+  - passa_tempo: 5m
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador: { motivo: emissao_desligada }
+  - notas_emitidas: 0

@@ -1,0 +1,13 @@
+nome: A conexão cai depois do envio e a nota foi criada na NFE.io; o sistema consulta pela referência do pedido, acha a nota e entrega, sem emitir de novo
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [falha_apos_criar, sucesso]
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - sistema_responde_contendo: "instável"
+  - nada_encaminhado: true
+  - passa_tempo: 5m
+  - sistema_entrega: [pdf, xml]
+  - estado: EMITIDA
+  - notas_emitidas: 1

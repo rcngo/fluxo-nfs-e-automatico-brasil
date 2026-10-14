@@ -1,0 +1,14 @@
+# Só o necessário para a imagem do motor (infra/producao/Dockerfile).
+.git
+node_modules
+infra
+saida
+avaliacao
+cenarios
+testes
+cadastro-piloto
+.omc
+.githooks
+**/*.pdf
+**/*.png
+**/*.env

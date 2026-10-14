@@ -1,0 +1,15 @@
+nome: A NFE.io aceita a nota mas não conclui em 4 horas; vai para o colaborador com o número da nota na NFE.io
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: demora
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: EMITINDO
+  - passa_tempo: 2h
+  - sistema_nao_responde: true
+  - passa_tempo: 2h
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: emissor_indisponivel
+      contendo: ["nota-falsa-1", "ainda em processamento"]
+  - notas_emitidas: 1

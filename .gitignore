@@ -1,0 +1,32 @@
+# Dependências
+node_modules/
+
+# Segredos (nunca versionar)
+infra/.env
+infra/secrets.env
+*.env.local
+
+# Notas emitidas e arquivos gerados
+saida/
+
+# Documentos e dados reais de clientes (ficam só nesta máquina)
+*.pdf
+/*.png
+avaliacao/casos/*.pdf
+avaliacao/casos/reais/
+avaliacao/relatorios/
+
+# Sistema
+.DS_Store
+
+# Estado local de ferramentas (plugins do Claude Code)
+.omc/
+
+# Planilha do piloto (dados reais da empresa e dos tomadores)
+cadastro-piloto/
+
+# Instalação do escritório (infra/producao): segredos, backups, planilhas
+infra/producao/.env
+infra/producao/secrets.env
+infra/producao/backups/
+infra/producao/cadastro/

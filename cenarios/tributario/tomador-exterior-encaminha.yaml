@@ -1,0 +1,11 @@
+nome: Tomador no exterior; vai para o colaborador sem perguntar CNPJ/CPF ao cliente
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Nota de R$ 2.000,00 de programação de setembro para a Acme Inc, cliente dos Estados Unidos."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo: ["tomador no exterior (\"Estados Unidos\")", "O que falta ou está inválido:", "o CNPJ ou CPF do tomador"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

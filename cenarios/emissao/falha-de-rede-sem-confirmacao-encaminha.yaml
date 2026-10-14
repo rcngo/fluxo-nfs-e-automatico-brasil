@@ -1,0 +1,19 @@
+nome: A conexão cai no envio e a consulta pela referência também não responde; nunca reenvia às cegas e, no prazo, vai para o colaborador avisando que não se sabe se a nota foi criada
+dado:
+  empresa: { exige_confirmacao: false }
+  nfeio: [falha_envio, sucesso]
+  nfeio_consulta: fora
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: AGUARDANDO_EMISSOR
+  - sistema_responde_contendo: "instável"
+  - passa_tempo: 2h
+  - sistema_nao_responde: true
+  - notas_emitidas: 0
+  - passa_tempo: 2h
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: emissor_indisponivel
+      contendo: ["não se sabe se a nota foi criada", "Confira no painel da NFE.io"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

@@ -1,0 +1,6 @@
+nome: A Meta avisa que uma mensagem enviada falhou (fora da janela); o motor registra o erro e não cria pedido
+passos:
+  - cliente: { whatsapp: status-falha-fora-da-janela.json }
+  - sistema_nao_responde: true
+  - nenhum_pedido: true
+  - evento_registrado: { tipo: erro, contendo: "131047" }

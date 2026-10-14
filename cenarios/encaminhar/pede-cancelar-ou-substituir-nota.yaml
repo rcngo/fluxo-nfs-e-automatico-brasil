@@ -1,0 +1,11 @@
+nome: Cliente pede para cancelar ou substituir uma nota já emitida e emitir outra; nada é emitido e o pedido vai ao colaborador (cancelamento é feito pelo escritório)
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "A nota 123 saiu errada. Cancela ela e emite outra de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: nota_ja_emitida
+      contendo: ["cancelar, substituir ou refazer uma nota já emitida", "painel da NFE.io"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

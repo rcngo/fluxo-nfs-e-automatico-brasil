@@ -1,0 +1,17 @@
+nome: Cliente não responde à pergunta em 2 dias úteis; o pedido vai para o colaborador (fim de semana não conta)
+dado:
+  hoje: 2026-10-15   # quinta-feira, 10h
+passos:
+  - cliente: "Preciso de uma nota de programação para a Agro Exemplo, R$ 3.500,00."
+  - estado: AGUARDANDO_CLIENTE
+  - passa_tempo: 2d                # sábado: só 1 dia útil passou
+  - estado: AGUARDANDO_CLIENTE
+  - nada_encaminhado: true
+  - passa_tempo: 2d                # segunda, depois das 10h: 2 dias úteis
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: cliente_nao_respondeu
+      para: pedidos.exemplo@gmail.com
+      contendo: ["Não consegui emitir", "cliente não respondeu", "Valor: R$ 3.500,00", "o CNPJ ou CPF do tomador", "Cliente: Preciso de uma nota", "/resolvido?t="]
+  - sistema_responde_contendo: "encaminhei seu pedido de nota ao escritório"
+  - notas_emitidas: 0

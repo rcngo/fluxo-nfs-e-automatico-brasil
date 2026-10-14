@@ -1,0 +1,11 @@
+nome: Cliente diz quanto quer receber (valor líquido); o valor bruto depende das retenções, vai para o colaborador
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  - cliente: "Preciso de uma nota de programação de setembro para 75.768.426/0001-99. Quero receber R$ 5.000,00 líquidos."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo: ["o cliente informou o valor líquido, que quer receber (\"R$ 5.000,00\"), e o valor bruto da nota depende das retenções", "Valor: R$ 5.000,00"]
+  - sistema_responde_contendo: "encaminhei ao escritório"
+  - notas_emitidas: 0

@@ -1,0 +1,9 @@
+nome: Na confirmação o cliente avisa que o valor é líquido; em vez de emitir, vai para o colaborador
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - sistema_responde_contendo: "Responda SIM"
+  - cliente: "Só um detalhe: os R$ 3.500,00 são líquidos, é o que preciso receber."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador: { motivo: caso_tributario_especial, contendo: ["valor líquido"] }
+  - cliente: "sim"
+  - notas_emitidas: 0

@@ -1,0 +1,16 @@
+Delivered-To: pedidos.exemplo@gmail.com
+Received: by 2002:a05:6a10:1234 with SMTP id abc; Wed, 15 Oct 2026 06:00:00 -0700 (PDT)
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=AbCdEf12;
+       arc=pass (i=1 spf=pass spfdomain=hotmail.com dkim=pass dkdomain=hotmail.com dmarc=pass fromdomain=hotmail.com);
+       spf=pass (google.com: domain of cliente.exemplo@hotmail.com designates 40.92.18.20 as permitted sender) smtp.mailfrom=cliente.exemplo@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+From: Carlos Exemplo <cliente.exemplo@hotmail.com>
+To: "pedidos.exemplo@gmail.com" <pedidos.exemplo@gmail.com>
+Subject: Nota
+Date: Wed, 15 Oct 2026 13:00:00 +0000
+Message-ID: <so-html@hotmail.com>
+MIME-Version: 1.0
+Content-Type: text/html; charset="utf-8"
+
+<html><head><style>p{margin:0}</style></head><body><p>Ol&aacute;,</p><p>Pode emitir a nota de programa&ccedil;&atilde;o de setembro para a Agro Exemplo (75.768.426/0001-99)<br>valor: R$&nbsp;3.500,00</p><blockquote>Mensagem antiga com R$ 9.999,00</blockquote></body></html>

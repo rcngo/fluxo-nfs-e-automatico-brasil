@@ -1,0 +1,6 @@
+nome: E-mail de quem não é remetente cadastrado (newsletter, fornecedor); o fluxo ignora sem gravar nada, e a mensagem fica na caixa para o atendimento normal
+passos:
+  - cliente: { eml: remetente-desconhecido.eml }
+  - sistema_nao_responde: true
+  - nada_encaminhado: true
+  - nenhum_pedido: true

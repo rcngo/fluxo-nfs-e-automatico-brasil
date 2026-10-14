@@ -1,0 +1,16 @@
+Delivered-To: pedidos.exemplo@gmail.com
+Received: by 2002:a05:6a10:1234 with SMTP id abc; Wed, 15 Oct 2026 06:00:00 -0700 (PDT)
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@hotmail.com header.s=selector1 header.b=AbCdEf12;
+       arc=pass (i=1 spf=pass spfdomain=hotmail.com dkim=pass dkdomain=hotmail.com dmarc=pass fromdomain=hotmail.com);
+       spf=pass (google.com: domain of cliente.exemplo@hotmail.com designates 40.92.18.20 as permitted sender) smtp.mailfrom=cliente.exemplo@hotmail.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=hotmail.com
+From: Carlos Exemplo <cliente.exemplo@hotmail.com>
+To: "pedidos.exemplo@gmail.com" <pedidos.exemplo@gmail.com>
+Subject: Nota de setembro
+Date: Wed, 15 Oct 2026 13:00:00 +0000
+Message-ID: <pedido-sem-cnpj@hotmail.com>
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+
+Oi! Preciso da nota de programação de setembro da Agro Exemplo, R$ 3.500,00.

@@ -1,0 +1,6 @@
+nome: CNPJ com dígito verificador errado; o sistema pede para conferir
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 74.865.958/0001-80, programação de setembro."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "não é válido"
+  - notas_emitidas: 0

@@ -1,0 +1,12 @@
+nome: Remetente sem cadastro (com o filtro de remetentes desligado); nada é emitido, o cliente não recebe resposta e o colaborador padrão é avisado
+dado:
+  config: { email_somente_remetentes_cadastrados: false }
+passos:
+  - cliente: { texto: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro.", de: "desconhecido@gmail.com" }
+  - sistema_nao_responde: true
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: remetente_nao_autorizado
+      para: pedidos.exemplo@gmail.com
+      contendo: ["remetente sem cadastro", "desconhecido@gmail.com não cadastrado", "não recebeu resposta automática"]
+  - notas_emitidas: 0

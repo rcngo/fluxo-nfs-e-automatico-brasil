@@ -1,0 +1,13 @@
+nome: Cliente manda áudio; o sistema não lê áudio, encaminha ao colaborador com o arquivo e avisa o cliente
+dado:
+  remetentes:
+    - { canal: whatsapp, identificador: "+5564999990000" }
+passos:
+  - cliente: { whatsapp: audio.json }
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: audio_ou_imagem
+      midia: "1234567890123456"
+      contendo: ["áudio, imagem ou arquivo", "Arquivo recebido: áudio (audio/ogg; codecs=opus), em anexo"]
+  - sistema_responde_contendo: "Não consigo ler áudio, imagem ou arquivo automaticamente"
+  - notas_emitidas: 0

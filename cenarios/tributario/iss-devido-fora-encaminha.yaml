@@ -1,0 +1,11 @@
+nome: Serviço das exceções da LC 116 (ISS pode ser devido fora do município); vai para o colaborador
+dado:
+  empresa: { exige_confirmacao: false }
+  servico: { iss_pode_ser_devido_fora: true }
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - estado: ENCAMINHADO
+  - encaminhado_ao_colaborador:
+      motivo: caso_tributario_especial
+      contendo: ["o serviço \"programação\" está entre as exceções da LC 116 (art. 3º): o ISS pode ser devido fora do município da empresa"]
+  - notas_emitidas: 0

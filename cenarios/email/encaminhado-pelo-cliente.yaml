@@ -1,0 +1,9 @@
+nome: O cliente encaminha (ENC:) o e-mail em que o tomador pediu a nota; o pedido de dentro do encaminhamento é lido e a nota sai
+dado:
+  empresa: { exige_confirmacao: false }
+passos:
+  # O cabeçalho do encaminhamento tem outra data ("14 de outubro"); o extrator falso não distingue,
+  # então a competência é simulada. A IA real é medida no caso s16 da avaliação.
+  - cliente: { eml: encaminhado.eml, ia: { competencia: { mes: 9, ano: null, trecho: "setembro" } } }
+  - mensagem_do_cliente_registrada: "Segue o pedido do cliente abaixo, pode emitir.\n\n________________________________\nDe: Financeiro Agro Exemplo <financeiro@agroexemplo.exemplo>\nEnviado: terça-feira, 14 de outubro de 2026 17:20\nPara: cliente.exemplo@hotmail.com\nAssunto: Nota de setembro\n\nBoa tarde! Por favor, emitir a nota de programação de setembro no valor de R$ 3.500,00. Nosso CNPJ: 75.768.426/0001-99."
+  - nota_emitida: { valor: 350000, tomador: "75768426000199", competencia: "2026-09" }

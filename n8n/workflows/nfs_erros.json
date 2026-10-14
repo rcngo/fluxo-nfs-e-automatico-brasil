@@ -1,0 +1,143 @@
+{
+  "id": "NfsErrosPoc00001",
+  "name": "NFS - Erros",
+  "nodes": [
+    {
+      "id": "node-0",
+      "name": "Erro em workflow",
+      "type": "n8n-nodes-base.errorTrigger",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "parameters": {}
+    },
+    {
+      "id": "node-1",
+      "name": "Resumir erro",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        240,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const e = $json.execution || {};\nconst t = $json.trigger || {};\nconst erro = e.error || t.error || {};\nreturn {\n  json: {\n    workflow: ($json.workflow && $json.workflow.name) || '',\n    no: e.lastNodeExecuted || (erro.node && erro.node.name) || (t.error ? 'gatilho' : ''),\n    mensagem: erro.message || erro.description || '',\n    execucao: e.id || null,\n    url: e.url || null,\n  },\n};"
+      }
+    },
+    {
+      "id": "node-2",
+      "name": "Motor: registrar erro",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        480,
+        0
+      ],
+      "parameters": {
+        "method": "POST",
+        "url": "http://motor:3000/erro-n8n",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ JSON.stringify($json) }}",
+        "options": {
+          "timeout": 180000
+        }
+      },
+      "onError": "continueRegularOutput"
+    },
+    {
+      "id": "node-3",
+      "name": "Montar alerta",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        720,
+        0
+      ],
+      "parameters": {
+        "mode": "runOnceForEachItem",
+        "jsCode": "const resumo = $('Resumir erro').item.json;\nconst reserva = \"pedidos.exemplo@gmail.com\";\nif ($json.para_email && $json.assunto) return { json: $json };\nif (!reserva) return [];\nreturn {\n  json: {\n    para_email: reserva,\n    assunto: '[NFS-e] Erro no n8n — ' + (resumo.workflow || 'workflow') + ' (motor sem resposta)',\n    texto: 'Um workflow do n8n falhou e o motor também não respondeu.\\n\\n' +\n      'Workflow: ' + resumo.workflow + '\\nEtapa: ' + resumo.no + '\\nErro: ' + resumo.mensagem +\n      (resumo.url ? '\\nExecução: ' + resumo.url : ''),\n  },\n};"
+      }
+    },
+    {
+      "id": "node-4",
+      "name": "Gmail: alerta",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        0
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "SSKtG9q8MTB0rW44",
+          "name": "Gmail account"
+        }
+      },
+      "parameters": {
+        "resource": "message",
+        "operation": "send",
+        "sendTo": "={{ $json.para_email }}",
+        "subject": "={{ $json.assunto }}",
+        "emailType": "text",
+        "message": "={{ $json.texto }}",
+        "options": {
+          "appendAttribution": false
+        }
+      }
+    }
+  ],
+  "connections": {
+    "Erro em workflow": {
+      "main": [
+        [
+          {
+            "node": "Resumir erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Resumir erro": {
+      "main": [
+        [
+          {
+            "node": "Motor: registrar erro",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Motor: registrar erro": {
+      "main": [
+        [
+          {
+            "node": "Montar alerta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Montar alerta": {
+      "main": [
+        [
+          {
+            "node": "Gmail: alerta",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false
+}

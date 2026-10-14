@@ -1,0 +1,6 @@
+nome: Mensagem que não é pedido de nota; fica para o atendimento normal, sem resposta automática
+passos:
+  - cliente: "Olá, podem me enviar o boleto dos honorários de outubro?"
+  - sistema_nao_responde: true
+  - estado: CANCELADO
+  - notas_emitidas: 0

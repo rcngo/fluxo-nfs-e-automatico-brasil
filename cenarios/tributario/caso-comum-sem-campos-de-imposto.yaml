@@ -1,0 +1,9 @@
+nome: Caso comum (PJ, serviço sem retenção marcada); a nota sai e nenhum campo de imposto vai para a NFE.io
+passos:
+  - cliente: "Nota de R$ 3.500,00 para 75.768.426/0001-99, programação de setembro."
+  - sistema_responde_contendo: "Responda SIM"
+  - cliente: "sim"
+  - nota_emitida: { valor: 350000, tomador: "75768426000199" }
+  - payload_sem_impostos: true
+  - nada_encaminhado: true
+  - estado: EMITIDA

@@ -1,0 +1,10 @@
+nome: Nota da empresa A para a empresa B (nome de uma, CNPJ da outra); o sistema pergunta em vez de adivinhar
+dado:
+  empresa: { exige_confirmacao: false }
+  outras_empresas:
+    - { cnpj: "81452590000195", razao_social: "AURORA SERVICOS DIGITAIS LTDA", exige_confirmacao: false }
+passos:
+  - cliente: "Emitir pela Modelo e Cia uma nota de R$ 3.500,00 para a 81.452.590/0001-95, programação de setembro."
+  - estado: AGUARDANDO_CLIENTE
+  - sistema_responde_contendo: "Para qual empresa é esta nota?"
+  - notas_emitidas: 0
